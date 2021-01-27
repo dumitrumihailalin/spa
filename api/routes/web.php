@@ -16,3 +16,30 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/redirect', function () {
+    $query = http_build_query([
+        'client_id' => '5',
+        'redirect_uri' => 'http://127.0.0.1:8001/callback',
+        'response_type' => 'code',
+        'scope' => ''
+    ]);
+
+    return redirect('http://127.0.0.1:8000/oauth/authorize?'.$query);
+});
+
+Route::get('/callback', function(\Illuminate\Http\Request $request) {
+    $http = new \GuzzleHttp\Client;
+
+    $response = $http->post('http://127.0.0.1/oauth/token', [
+       'form_params' => [
+           'client_id' => '5',
+           'client_secret' => 'tSaXBEruFLsvAWXsZwktkBY2FABTkKx0yYldbIDz',
+           'grant_type' => 'authorization_code',
+           'redirect_uri' => 'http://127.0.0.1:8001/callback',
+           'code' => $request->code,
+       ],
+    ]);
+
+    return json_decode((string) $response->getBody(), true);
+});
