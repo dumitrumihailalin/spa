@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { navigate } from "@reach/router";
 
 class Login extends React.Component {
   constructor(props) {
@@ -12,17 +13,16 @@ class Login extends React.Component {
 
   mySubmitHandler = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:8000/api/auth/login', {
+    axios.post('http://127.0.0.1:8000/api/login', {
       email: this.state.email,
       password: this.state.password
     })
     .then(function (response) {
       localStorage.setItem('access-token', JSON.stringify(response.data))
+      navigate('/games');
     })
     .catch(function (error) {
       console.log(error);
-     
-      window.history.pushState({login: 1}, "title 1", "?error=true") 
     });
   }
   myChangeHandler = (event) => {
@@ -32,16 +32,18 @@ class Login extends React.Component {
   }
   render () {
     return (
-      <form onSubmit={this.mySubmitHandler}>
-        <h1>Login</h1>
-        <p>Username:</p>
-        <input type='text' name='email' onChange={this.myChangeHandler}/>
-        <p>Password:</p>
-        <input type='text' name='password' onChange={this.myChangeHandler}/>
-        <br/>
-        <br/>
-        <input type='submit' className='btn btn-success' value='login'/>
-      </form>
+      <div className='container pt-5 pb-5'>
+        <form onSubmit={this.mySubmitHandler}>
+          <h1>Login</h1>
+          <p>Username:</p>
+          <input type='text' name='email' onChange={this.myChangeHandler}/>
+          <p>Password:</p>
+          <input type='text' name='password' onChange={this.myChangeHandler}/>
+          <br/>
+          <br/>
+          <input type='submit' className='btn-custom' value='login'/>
+        </form>
+      </div>
     )
   }
  }
