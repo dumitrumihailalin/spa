@@ -46,14 +46,24 @@ class AuthController extends Controller
      */
     public function login(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'email' => 'required|email',
+            'password' => 'required',
+        ]);
+
+        if($validator->fails()){
+            // return bad request
+            return response()->json('error', 400);
+        }
+
+        // check email and password
         if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
             $user = Auth::user();
             $success['user'] = $user;
             $success['token'] =  $user->createToken('MyApp')->accessToken;
             return response()->json($success, 200);
-        }
-        else{
-            return response()->json('error', 200);
+        } else {
+            return response()->json('error', 400);
         }
     }
 
@@ -68,9 +78,9 @@ class AuthController extends Controller
         $refreshTokenRepository->revokeRefreshTokensByAccessTokenId($request->user()->token()->id);
         return response()->json(['message' => 'Logged out'], 200);
     }
+
     public function userInfo()
     {
-
         $user = auth()->user();
 
         return response()->json(['user' => $user], 200);
