@@ -7,7 +7,7 @@ export default function* IndexSaga () {
   yield [
     SignupSaga(),
     LoginSaga(),
-    // WidgetSaga(), 
-    // DashboardSaga()
+    WidgetSaga(), 
+    DashboardSaga()
   ]
 }

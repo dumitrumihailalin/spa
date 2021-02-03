@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
-use Validator;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use DB;
 use Laravel\Passport\TokenRepository;
@@ -22,21 +22,26 @@ class AuthController extends Controller
     {
         $validator = Validator::make($request->all(), [
             'name' => 'required',
-            'email' => 'required|email',
-            'password' => 'required',
+            'email' => 'required|unique:users|max:50',
+            'password' => 'required:users|min:10',
         ]);
 
         if($validator->fails()){
-            return response()->json('error', 200);
+            return response()->json($validator->errors(), 400);
         }
 
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
-        $user = User::create($input);
-        $success['token'] =  $user->createToken('MyApp')->accessToken;
-        $success['name'] =  $user->name;
+        try {
+            $user = User::create($input);
+            $success['token'] =  $user->createToken('MyApp')->accessToken;
+            $success['name'] =  $user->name;
 
-        return response()->json($success, 200);
+            return response()->json($success, 200);
+        } catch (\Illuminate\Database\QueryException $e) {
+            $errorCode = $e->errorInfo[1];
+                return response()->json($e->getMessage(), $e->getCode());
+        }
     }
 
     /**

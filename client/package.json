@@ -1,75 +1,45 @@
 {
-  "name": "code",
+  "name": "client",
   "version": "0.1.0",
   "private": true,
-  "devDependencies": {
-    "babel-eslint": "6",
-    "eslint": "^3.15.0",
-    "eslint-config-airbnb": "^14.1.0",
-    "eslint-plugin-import": "^2.2.0",
-    "eslint-plugin-jsx-a11y": "^3.0.2",
-    "eslint-plugin-react": "^6.9.0",
-    "react-scripts": "0.9.0"
-  },
   "dependencies": {
+    "@material-ui/core": "^4.11.3",
+    "@testing-library/jest-dom": "^5.11.9",
+    "@testing-library/react": "^11.2.5",
+    "@testing-library/user-event": "^12.6.3",
     "formik": "^2.2.6",
-    "react": "^15.4.2",
-    "react-dom": "^15.4.2",
-    "react-redux": "^5.0.2",
-    "react-router": "^3.0.2",
-    "redux": "^3.6.0",
-    "redux-form": "^6.5.0",
-    "redux-saga": "^0.14.3"
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "react-redux": "^7.2.2",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.1",
+    "redux": "^4.0.5",
+    "web-vitals": "^0.2.4",
+    "yup": "^0.32.8"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "parser": "babel-eslint",
-    "extends": "airbnb",
-    "globals": {
-      "localStorage": true,
-      "document": true,
-      "fetch": true
-    },
-    "rules": {
-      "semi": [
-        "error",
-        "never"
-      ],
-      "space-before-function-paren": [
-        "error",
-        "always"
-      ],
-      "jsx-quotes": [
-        "error",
-        "prefer-double"
-      ],
-      "no-unused-vars": [
-        "error",
-        {
-          "varsIgnorePattern": "React"
-        }
-      ],
-      "no-shadow": 0,
-      "react/jsx-uses-vars": [
-        2
-      ],
-      "react/require-default-props": [
-        0
-      ],
-      "react/jsx-filename-extension": [
-        1,
-        {
-          "extensions": [
-            ".js",
-            ".jsx"
-          ]
-        }
-      ]
-    }
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
