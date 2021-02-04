@@ -1,10 +1,7 @@
-import React, { Component } from 'react';
+import React from 'react';
 import Toolbar from '@material-ui/core/Toolbar';
-import Typography from '@material-ui/core/Typography';
 import AppBar from '@material-ui/core/AppBar';
-import Button from '@material-ui/core/Button';
 import { makeStyles } from '@material-ui/core/styles';
-import { render } from 'react-dom';
 import {
   Link
 } from "react-router-dom";
@@ -36,9 +33,6 @@ const useStyles = makeStyles((theme) => ({
         return (
             <AppBar position="sticky" color="default" elevation={0} className={classes.appBar}>
             <Toolbar className={classes.toolbar}>
-              <Typography variant="h6" color="inherit" noWrap>
-                Company name
-              </Typography>
               <nav>
                 <Link variant="button" color="textPrimary" to='/' className={classes.link}>
                   Dashboard
