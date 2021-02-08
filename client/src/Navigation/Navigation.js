@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
                 <Link variant="button" color="textPrimary" to='/' className={classes.link}>
                   Dashboard
                 </Link>
-                <Link variant="button" to="/register" color="textPrimary" href="#" className={classes.link}>
+                <Link variant="button" to="/register" color="textPrimary" className={classes.link}>
                   Register
                 </Link>
               </nav>

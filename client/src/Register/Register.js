@@ -3,6 +3,8 @@ import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
 
 const validationSchema = yup.object({
   name: yup
@@ -32,7 +34,10 @@ const Register = () => {
   });
 
   return (
-    <div>
+    <Container maxWidth="lg">
+      <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+        Register
+      </Typography>
       <form onSubmit={formik.handleSubmit}>
       <TextField
           fullWidth
@@ -66,10 +71,10 @@ const Register = () => {
           helperText={formik.touched.password && formik.errors.password}
         />
         <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
+          Register
         </Button>
       </form>
-    </div>
+    </Container>
   );
 };
 

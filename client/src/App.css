@@ -46,3 +46,13 @@ bodys {
     transform: rotate(360deg);
   }
 }
+
+
+.makeStyles-link-4 {
+  margin: 8px 1px !important;
+  color: #fff;
+  background: #303F9F;
+  text-decoration: none;
+  padding: 7px;
+  border-radius: 4px;
+}

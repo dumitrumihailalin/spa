@@ -2,16 +2,19 @@
 import React  from 'react';
 import './App.css';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import Dashboard from './Dashboard';
+import Dashboard from './Dashboard/Dashboard';
 import Login from './Login/Login';
 import Register from './Register/Register';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Navigation from './Navigation/Navigation';
+import { useSelector } from 'react-redux';
 
 function App() {
+  const counter = useSelector( state => state.counter);
   return (
     <div className="App">
+      Counter { counter }
     <BrowserRouter>
       <Container>
       <Navigation/>
@@ -21,8 +24,10 @@ function App() {
         <Route path="/register" exact component={Register} />
       </Switch>
       </Container>
+      
     </BrowserRouter>
       {/* Footer */}
+    
       <footer>
         <Typography variant="h6" align="center" gutterBottom>
           Copyright 2021

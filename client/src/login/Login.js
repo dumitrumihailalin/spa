@@ -1,8 +1,13 @@
-import React from 'react';
+import React, { Component, PropTypes } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import Typography from '@material-ui/core/Typography';
+import Container from '@material-ui/core/Container';
+import { reduxForm, Field } from 'redux-form';
+import { connect } from 'react-redux';
+import loginRequest from './actions'
 
 const validationSchema = yup.object({
   email: yup
@@ -16,20 +21,23 @@ const validationSchema = yup.object({
 });
 
 const Login = () => {
+  
   const formik = useFormik({
     initialValues: {
-      name: '',
       email: '',
       password: '',
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      alert(JSON.stringify(values, null, 2));
+      loginRequest(values);
     },
   });
 
   return (
-    <div>
+    <Container maxWidth="lg">
+      <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
+        Login
+      </Typography>
       <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
@@ -53,10 +61,10 @@ const Login = () => {
           helperText={formik.touched.password && formik.errors.password}
         />
         <Button color="primary" variant="contained" fullWidth type="submit">
-          Submit
+          Login
         </Button>
       </form>
-    </div>
+    </Container>
   );
 };
 
