@@ -8,26 +8,20 @@ import Register from './Register/Register';
 import Container from '@material-ui/core/Container';
 import Typography from '@material-ui/core/Typography';
 import Navigation from './Navigation/Navigation';
-import { useSelector } from 'react-redux';
 
 function App() {
-  const counter = useSelector( state => state.counter);
   return (
+    <Container  maxWidth="lg">
     <div className="App">
-      Counter { counter }
     <BrowserRouter>
-      <Container>
       <Navigation/>
       <Switch>
         <Route path="/" exact component={Dashboard} />
         <Route path="/login" exact component={Login} />
         <Route path="/register" exact component={Register} />
       </Switch>
-      </Container>
-      
     </BrowserRouter>
       {/* Footer */}
-    
       <footer>
         <Typography variant="h6" align="center" gutterBottom>
           Copyright 2021
@@ -35,7 +29,9 @@ function App() {
         {/* <Copyright /> */}
       </footer>
       {/* End footer */}
+      
       </div>
+      </Container>
   );
 }
 

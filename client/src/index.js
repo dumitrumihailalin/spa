@@ -5,15 +5,14 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import { createStore } from 'redux';
 import { Provider } from 'react-redux';
-import counterReducer from './reducers';
+import rootReducer from './Register/reducers/users';
 
-const store = createStore( counterReducer );
+const store = createStore(rootReducer)
 ReactDOM.render(
   <Provider store={store}>
     <App />
   </Provider>,
-  document.getElementById('root')
-  
+    document.getElementById('root')
 );
 
 // If you want to start measuring performance in your app, pass a function

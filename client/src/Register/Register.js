@@ -8,6 +8,8 @@ import Container from '@material-ui/core/Container';
 import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
+import { connect } from 'react-redux'
+import { createUser } from './actions/actions';
 
 const validationSchema = yup.object({
   name: yup
@@ -24,6 +26,7 @@ const validationSchema = yup.object({
   confirm_password: yup
     .string('Confirm Password')
     .min(8, 'Passwords must be equal')
+    .required('Confirm Password is required'),
 });
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,17 +39,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Register = () => {
+const Register = ({ dispatch }) => {
   const formik = useFormik({
     initialValues: {
       name: '',
       email: '',
       password: '',
+      confirm_password: '',
       toggle: false,
-      checked: [],
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
+      dispatch(createUser(values));
       alert(JSON.stringify(values, null, 2));
     },
   });
@@ -118,8 +122,8 @@ const Register = () => {
                 </Paper>
               </Grid>
               <Grid item xs={12} sm={12} >
-              <Paper className={classes.paper} alignLeft>
-                  <input type="checkbox" />Agree terms and conditions.
+              <Paper className={classes.paper}>
+                  <input type="checkbox" name="toggle" value={formik.values.toggle} onChange={formik.handleChange}/>Agree terms and conditions.
                 </Paper>
               </Grid>
             </Grid>
@@ -133,4 +137,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default connect()(Register)

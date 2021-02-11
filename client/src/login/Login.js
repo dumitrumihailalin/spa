@@ -5,10 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Typography from '@material-ui/core/Typography';
 import Container from '@material-ui/core/Container';
-import { reduxForm, Field } from 'redux-form';
-import { connect } from 'react-redux';
-import loginRequest from './actions'
-
+import { Counter } from './Counter';
 const validationSchema = yup.object({
   email: yup
     .string('Enter your email')
@@ -29,16 +26,17 @@ const Login = () => {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      loginRequest(values);
+      console.log(values);
     },
   });
-
+  
   return (
     <Container maxWidth="lg">
       <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
         Login
       </Typography>
-      <form onSubmit={formik.handleSubmit}>
+      <Counter />
+        <form onSubmit={formik.handleSubmit}>
         <TextField
           fullWidth
           id="email"
